@@ -71,6 +71,7 @@ pub trait Trait: frame_system::Trait {
 
 decl_storage! {
 	trait Store for Module<T: Trait> as BondingCurve {
+        /// Stores all the curve data that have been created.
         Curves get(fn curves):
             map hasher(blake2_128_concat) u64 => Option<BondingCurve<T::AccountId, CurrencyIdOf<T>>>;
 

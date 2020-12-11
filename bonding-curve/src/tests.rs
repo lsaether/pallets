@@ -11,9 +11,10 @@ fn it_creates_a_new_bonding_curve() {
         assert_noop!(
             BondingCurve::create(
                 Origin::signed(ALICE),
-                0,
+                0, // currency_id | Creator token $ANSON
                 1,
                 100,
+                1000,
             ),
             Error::<Test>::CurrencyAlreadyExists,
         );
@@ -24,6 +25,7 @@ fn it_creates_a_new_bonding_curve() {
                 1,
                 1,
                 100,
+                1000,
             )
         );
 
@@ -47,6 +49,7 @@ fn it_can_buy_from_a_bonding_curve() {
                 1,
                 1,
                 100,
+                1000,
             )
         );
 
@@ -62,7 +65,7 @@ fn it_can_buy_from_a_bonding_curve() {
         let native_balance = Tokens::free_balance(0, &BOB);
         let token_balance = Tokens::free_balance(1, &BOB);
         let diff = 1_000 - native_balance;
-        assert_eq!(diff, 200);
+        assert_eq!(diff, 400);
         assert_eq!(token_balance, 2);
     });
 }
@@ -77,6 +80,7 @@ fn it_can_sell_to_a_bonding_curve() {
                 1,
                 1,
                 100,
+                1000,
             )
         );
 

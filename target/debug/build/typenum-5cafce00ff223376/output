@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/home/volt/workspaces/lsaether/pallets/target/debug/build/typenum-5cafce00ff223376/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/home/volt/workspaces/lsaether/pallets/target/debug/build/typenum-5cafce00ff223376/out/op.rs
