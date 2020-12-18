@@ -23,6 +23,7 @@ use sp_version::RuntimeVersion;
 #[cfg(feature = "std")]
 use sp_version::NativeVersion;
 use sp_runtime::ModuleId;
+use orml_currencies::BasicCurrencyAdapter;
 
 // A few exports that help ease life for downstream crates.
 #[cfg(any(feature = "std", test))]
@@ -278,13 +279,24 @@ impl orml_tokens::Trait for Runtime {
 
 parameter_types! {
 	pub const GetNativeCurrencyId: u128 = 0;
+}
+
+impl orml_currencies::Trait for Runtime {
+	type Event = Event;
+	type MultiCurrency = Tokens;
+	type NativeCurrency = BasicCurrencyAdapter<Runtime, Balances, i64, BlockNumber>;
+	type GetNativeCurrencyId = GetNativeCurrencyId;
+	type WeightInfo = ();
+}
+
+parameter_types! {
 	pub const CurveDeposit: u128 = 10;
 	pub const BondingCurveModuleId: ModuleId = ModuleId(*b"sub/bond");
 }
 
 impl pallet_bonding_curve::Trait for Runtime {
 	type Event = Event;
-	type Currency = Tokens;
+	type Currency = Currencies;
 	type GetNativeCurrencyId = GetNativeCurrencyId;
 	type CurveDeposit = CurveDeposit;
 	type ModuleId = BondingCurveModuleId;
@@ -308,6 +320,7 @@ construct_runtime!(
 		// Include the custom logic from the template pallet in the runtime.
 		TemplateModule: pallet_template::{Module, Call, Storage, Event<T>},
 		Tokens: orml_tokens::{Module, Call, Storage, Event<T>},
+		Currencies: orml_currencies::{Module, Call, Event<T>},
 		BondingCurve: pallet_bonding_curve::{Module, Call, Storage, Event<T>},
 	}
 );

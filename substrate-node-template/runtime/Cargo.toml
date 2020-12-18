@@ -56,6 +56,12 @@ sp-std = { default-features = false, version = '2.0.0' }
 sp-transaction-pool = { default-features = false, version = '2.0.0' }
 sp-version = { default-features = false, version = '2.0.0' }
 
+[dependencies.orml-currencies]
+default-features = false
+git = 'https://github.com/open-web3-stack/open-runtime-module-library'
+version = '0.3.0'
+rev = 'e5f3be0372e7f2f2e2c9a0079633e92115c8feb4'
+
 [dependencies.orml-tokens]
 default-features = false
 git = 'https://github.com/open-web3-stack/open-runtime-module-library'
@@ -87,6 +93,7 @@ std = [
     'frame-support/std',
     'frame-system/std',
     'frame-system-rpc-runtime-api/std',
+    'orml-currencies/std',
     'orml-tokens/std',
     'orml-traits/std',
     'pallet-aura/std',

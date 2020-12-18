@@ -3275,6 +3275,7 @@ dependencies = [
  "frame-system-benchmarking",
  "frame-system-rpc-runtime-api",
  "hex-literal",
+ "orml-currencies",
  "orml-tokens",
  "orml-traits",
  "pallet-aura",
@@ -3440,6 +3441,21 @@ name = "openssl-probe"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "77af24da69f9d9341038eba93a073b1fdaaa1b788221b00a69bce9e762cb32de"
+
+[[package]]
+name = "orml-currencies"
+version = "0.3.0"
+source = "git+https://github.com/open-web3-stack/open-runtime-module-library?rev=e5f3be0372e7f2f2e2c9a0079633e92115c8feb4#e5f3be0372e7f2f2e2c9a0079633e92115c8feb4"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "orml-traits",
+ "parity-scale-codec",
+ "serde",
+ "sp-io",
+ "sp-runtime",
+ "sp-std",
+]
 
 [[package]]
 name = "orml-tokens"
@@ -7273,7 +7289,7 @@ version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3bfd5b7557925ce778ff9b9ef90e3ade34c524b5ff10e239c69a42d546d2af56"
 dependencies = [
- "rand 0.7.3",
+ "rand 0.3.23",
 ]
 
 [[package]]
