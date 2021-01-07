@@ -1,6 +1,6 @@
 use crate::{Error, mock::*};
 use frame_support::{
-    assert_noop, assert_ok, traits::OnInitialize,
+    assert_noop, assert_ok,
 };
 use orml_traits::MultiCurrency;
 
@@ -13,8 +13,9 @@ fn it_creates_a_new_bonding_curve() {
                 Origin::signed(ALICE),
                 0, // currency_id | Creator token $ANSON
                 1,
-                100,
+                1,
                 1000,
+                0,
             ),
             Error::<Test>::CurrencyAlreadyExists,
         );
@@ -24,8 +25,9 @@ fn it_creates_a_new_bonding_curve() {
                 Origin::signed(ALICE),
                 1,
                 1,
-                100,
+                1,
                 1000,
+                0
             )
         );
 
@@ -33,7 +35,7 @@ fn it_creates_a_new_bonding_curve() {
         assert_eq!(bc.creator, ALICE);
         assert_eq!(bc.currency_id, 1);
         assert_eq!(bc.exponent, 1);
-        assert_eq!(bc.slope, 100);
+        assert_eq!(bc.slope, 1);
 
         // TODO: Ensure funds are reserved.
     });
@@ -48,19 +50,27 @@ fn it_can_buy_from_a_bonding_curve() {
                 Origin::signed(ALICE),
                 1,
                 1,
-                100,
-                1000,
+                1,
+                1_000_000_000_000_000,
+                0
             )
         );
 
-        // Bob buys 2 tokens.
+
+        let bob_bal_before = Balances::free_balance(&BOB);
+
+        // Bob buys 1 tokens.
         assert_ok!(
             BondingCurve::buy(
                 Origin::signed(BOB),
                 0,
-                2,
+                1_000_000_000_000,
             )
         );
+
+        let bob_bal_after = Balances::free_balance(&BOB);
+        assert_eq!(bob_bal_before, 1_000_000_000_000);
+        assert_eq!(bob_bal_after, 499_999_999_999);
 
         let native_balance = Tokens::free_balance(0, &BOB);
         let token_balance = Tokens::free_balance(1, &BOB);
@@ -79,8 +89,9 @@ fn it_can_sell_to_a_bonding_curve() {
                 Origin::signed(ALICE),
                 1,
                 1,
-                100,
+                1,
                 1000,
+                0
             )
         );
 

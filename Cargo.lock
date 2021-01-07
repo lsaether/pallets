@@ -1070,6 +1070,21 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
 
 [[package]]
+name = "orml-currencies"
+version = "0.3.0"
+source = "git+https://github.com/open-web3-stack/open-runtime-module-library?rev=e5f3be0372e7f2f2e2c9a0079633e92115c8feb4#e5f3be0372e7f2f2e2c9a0079633e92115c8feb4"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "orml-traits",
+ "parity-scale-codec",
+ "serde",
+ "sp-io",
+ "sp-runtime",
+ "sp-std",
+]
+
+[[package]]
 name = "orml-tokens"
 version = "0.3.0"
 source = "git+https://github.com/open-web3-stack/open-runtime-module-library?rev=e5f3be0372e7f2f2e2c9a0079633e92115c8feb4#e5f3be0372e7f2f2e2c9a0079633e92115c8feb4"
@@ -1120,6 +1135,7 @@ version = "0.1.0"
 dependencies = [
  "frame-support",
  "frame-system",
+ "orml-currencies",
  "orml-tokens",
  "orml-traits",
  "pallet-balances",
@@ -2326,7 +2342,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "04f8ab788026715fa63b31960869617cba39117e520eb415b0139543e325ab59"
 dependencies = [
  "cfg-if 0.1.10",
- "rand 0.7.3",
+ "rand 0.5.6",
  "static_assertions",
 ]
 

@@ -120,7 +120,7 @@ decl_module! {
         /// Creates a new bonding curve.
         ///
         #[weight = 0]
-        pub fn create(origin, currency_id: CurrencyIdOf<T>, exponent: u32, slope: u128, max_supply: u128, inital_supply: u128) {
+        pub fn create(origin, currency_id: CurrencyIdOf<T>, exponent: u32, slope: u128, max_supply: u128, initial_supply: u128) {
             let sender = ensure_signed(origin)?;
 
             // Requires an amount to be reserved.
@@ -138,7 +138,7 @@ decl_module! {
             // Adds 1 of the token to the module account.
             T::Currency::deposit(currency_id, &Self::module_account(), 1.saturated_into())?;
 
-            T::Currency::deposit(currency_id, sender.clone(), initial_supply.saturated_into())?;
+            T::Currency::deposit(currency_id, &sender, initial_supply.saturated_into())?;
 
             let new_curve = BondingCurve {
                 creator: sender.clone(),
