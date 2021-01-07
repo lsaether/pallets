@@ -46,7 +46,7 @@ impl<
     /// Integral when the curve is at point `x`.
     pub fn integral(&self, x: u128) -> u128 {
         let nexp = self.exponent + 1;
-        x.pow(nexp) * self.slope / nexp as u128
+        x.pow(nexp) / 1_000_000_000_000 * self.slope / nexp as u128
     }
 }
 
